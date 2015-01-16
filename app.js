@@ -35,5 +35,29 @@ $(document).ready(function() {
 			}
 		})
 	}
-	
+	$('#addUser').on('click', function() {
+		var userName = $('#name').val();
+		var userJob = $('#job').val();
+		return $.ajax({
+			method: 'POST',
+			url: 'http://reqr.es/api/users',
+			data: {name: userName, job: userJob}
+			success: function(res) {
+				$('#recentUser').html(
+					'<li>' +
+						'name: ' + res.name +
+					'</li>' +
+					'<li>' +
+						'job: ' + res.job +
+					'</li>' +
+					'<li>' +
+						'id: ' + res.id +
+					'</li>' +
+					'<li>' +
+						'created at: ' + res.createdAt +
+					'</li>'
+				)
+			}
+		})
+	});
 });
